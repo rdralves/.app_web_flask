@@ -14,14 +14,21 @@ def home():
 
         password_hash = generate_password_hash(password)
 
-        print(f"Name: {name}, Email: {email}, Password: {password_hash}")
-        
-        # Cria o usuário e salva no banco
-        novo_usuario = Usuario(nome=name, email=email)
-        novo_usuario.set_senha(password)
-        db.session.add(novo_usuario)
-        db.session.commit()
+        print(f"Name: {name}, Email: {email}")
 
-        print(f"Usuário {name} salvo com sucesso!")
+        try:
+            if Usuario.query.filter_by(email=email).first():
+                print("Erro: Email já cadastrado.")
+            else:
+                # Cria o usuário e salva no banco
+                novo_usuario = Usuario(
+                    nome=name, email=email, senha_hash=password_hash)
+                # novo_usuario.set_senha(password)
+                db.session.add(novo_usuario)
+                db.session.commit()
+
+                print(f"Usuário {name} salvo com sucesso!")
+        except Exception as e:
+            print(f"Erro ao salvar usuário: {e}")
 
     return render_template('index.html', hello=hello)
