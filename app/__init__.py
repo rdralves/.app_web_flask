@@ -8,7 +8,7 @@ def create_app():
     # Configurações
     app.config['SECRET_KEY'] = 'your_secret_key'
     # ou outro banco como PostgreSQL
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///meubanco.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cadastro.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Inicializa o banco
