@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import logout_user
+from flask_login import logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import Usuario, db
 
@@ -62,10 +62,12 @@ def login():
 
     return render_template('login.html')
 
+
 @main_bp.route('/dashboard')
 def dashboard():
     dados = Usuario.query.all()
     return render_template('dashboard.html', dados=dados)
+
 
 @main_bp.route('/logout')
 @login_required

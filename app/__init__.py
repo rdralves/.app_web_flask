@@ -1,5 +1,6 @@
 from flask import Flask
 from .models import db  # importa o db do seu models.py
+from flask_login import LoginManager
 
 
 def create_app():
@@ -10,6 +11,10 @@ def create_app():
     # ou outro banco como PostgreSQL
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cadastro.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    # Configuração do Flask-Login
+    login_manager = LoginManager()
+    login_manager.init_app(app)
 
     # Inicializa o banco
     db.init_app(app)
