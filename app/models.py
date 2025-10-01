@@ -1,10 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin  # 👈 Importa o mixin necessário
 from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
 
-class Usuario(db.Model):
+class Usuario(db.Model, UserMixin):  # 👈 Herda de UserMixin
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
