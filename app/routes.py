@@ -65,6 +65,7 @@ def login():
 
 
 @main_bp.route('/dashboard')
+@login_required
 def dashboard():
     dados = Usuario.query.all()
     return render_template('dashboard.html', dados=dados)
