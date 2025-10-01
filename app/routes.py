@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import logout_user
+from werkzeug.security import generate_password_hash, check_password_hash, login_required
 from app.models import Usuario, db
 
 main_bp = Blueprint('main_bp', __name__)
@@ -65,3 +66,10 @@ def login():
 def dashboard():
     dados = Usuario.query.all()
     return render_template('dashboard.html', dados=dados)
+
+@main_bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("Você foi desconectado com sucesso.", "success")
+    return redirect(url_for('main_bp.login'))
