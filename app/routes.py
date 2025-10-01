@@ -41,6 +41,7 @@ def home():
 
     return render_template('cadastro.html')
 
+
 @main_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -54,8 +55,13 @@ def login():
         usuario = Usuario.query.filter_by(email=email).first()
         if usuario and check_password_hash(usuario.senha_hash, password):
             flash(f"Bem-vindo de volta, {usuario.nome}!", "success")
-            return redirect(url_for('main_bp.index'))
+            return redirect(url_for('main_bp.dashboard'))
         else:
             flash("Email ou senha inválidos.", "danger")
 
     return render_template('login.html')
+
+@main_bp.route('/dashboard')
+def dashboard():
+    dados = Usuario.query.all()
+    return render_template('dashboard.html', dados=dados)
