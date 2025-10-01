@@ -7,7 +7,7 @@ main_bp = Blueprint('main_bp', __name__)
 
 @main_bp.route('/')
 def index():
-    hello = "Hello, World! Hello _Flask!"
+    hello = "Hello _Flask!"
     return render_template('index.html', hello=hello)
 
 
