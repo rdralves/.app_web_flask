@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import Usuario, db
 
 main_bp = Blueprint('main_bp', __name__)
@@ -40,4 +40,22 @@ def home():
             flash("Erro interno ao salvar usuário.", "danger")
 
     return render_template('cadastro.html')
-# update_routes
+
+@main_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        if not email or not password:
+            flash("Todos os campos são obrigatórios.", "warning")
+            return render_template('login.html')
+
+        usuario = Usuario.query.filter_by(email=email).first()
+        if usuario and check_password_hash(usuario.senha_hash, password):
+            flash(f"Bem-vindo de volta, {usuario.nome}!", "success")
+            return redirect(url_for('main_bp.index'))
+        else:
+            flash("Email ou senha inválidos.", "danger")
+
+    return render_template('login.html')
