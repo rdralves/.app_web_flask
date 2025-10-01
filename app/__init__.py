@@ -1,5 +1,5 @@
 from flask import Flask
-from .models import db  # importa o db do seu models.py
+from .models import Usuario, db  # importa o db do seu models.py
 from flask_login import LoginManager
 
 
@@ -15,6 +15,12 @@ def create_app():
     # Configuração do Flask-Login
     login_manager = LoginManager()
     login_manager.init_app(app)
+    login_manager.login_view = 'main_bp.login'  # 👈 define a rota de login
+
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return Usuario.query.get(int(user_id))  # 👈 busca o usuário pelo ID
 
     # Inicializa o banco
     db.init_app(app)
