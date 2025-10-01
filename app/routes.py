@@ -34,7 +34,7 @@ def home():
                 db.session.commit()
 
                 flash(f"Usuário {name} salvo com sucesso!", "success")
-                return redirect(url_for('main_bp.index'))
+                return redirect(url_for('main_bp.login'))
         except Exception as e:
             print(f"Erro ao salvar usuário: {e}")
             flash("Erro interno ao salvar usuário.", "danger")
