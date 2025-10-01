@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import logout_user, login_required
+from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models import Usuario, db
 
@@ -55,6 +55,7 @@ def login():
 
         usuario = Usuario.query.filter_by(email=email).first()
         if usuario and check_password_hash(usuario.senha_hash, password):
+            login_user(usuario)
             flash(f"Bem-vindo de volta, {usuario.nome}!", "success")
             return redirect(url_for('main_bp.dashboard'))
         else:
