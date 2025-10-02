@@ -1,4 +1,5 @@
 import datetime
+from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin  # 👈 Importa o mixin necessário
 from werkzeug.security import generate_password_hash, check_password_hash
