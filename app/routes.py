@@ -18,8 +18,9 @@ def home():
         name = request.form.get('name')
         email = request.form.get('email')
         password = request.form.get('password')
+        data_nascimento = request.form.get('data_nascimento')
 
-        if not name or not email or not password:
+        if not name or not email or not password or not data_nascimento:
             flash("Todos os campos são obrigatórios.", "warning")
             return render_template('cadastro.html')
 
@@ -30,7 +31,7 @@ def home():
                 flash("Erro: Email já cadastrado.", "danger")
             else:
                 novo_usuario = Usuario(
-                    nome=name, email=email, senha_hash=password_hash)
+                    nome=name, email=email, senha_hash=password_hash, data_nascimento=data_nascimento)
                 db.session.add(novo_usuario)
                 db.session.commit()
 
