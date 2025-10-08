@@ -1,0 +1,55 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top left, #0f2027, #203a43, #2c5364);
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #66fcf1, #45a29e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-glow {
+  background: linear-gradient(90deg, #1f4068, #1b1b2f);
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+}
+
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.6);
+  background: linear-gradient(90deg, #162447, #1f4068);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+}
+
+.table-gradient thead {
+  background: linear-gradient(90deg, #162447, #1f4068);
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.navbar.bg-gradient-dark {
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+}
+
+.card {
+  border: none;
+}
