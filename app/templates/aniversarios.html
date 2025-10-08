@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Aniversariantes{% endblock %}
+
+{% block content %}
+<div class="container fade-in">
+    <div class="card glass p-4 mt-4">
+        <h2 class="text-gradient mb-4 text-center">🎉 Aniversariantes de {{ hoje }}</h2>
+
+        {% if aniversariantes_hoje %}
+        <ul class="list-group list-group-flush">
+            {% for pessoa in aniversariantes_hoje %}
+            <li class="list-group-item glass-item d-flex justify-content-between align-items-center">
+                <span>{{ pessoa.nome }}</span>
+                <span class="badge bg-gradient-info">{{ pessoa.data_nascimento.strftime('%d/%m') }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-center text-muted">Ninguém faz aniversário hoje. 💤</p>
+        {% endif %}
+    </div>
+
+    <hr class="my-5 border-secondary">
+
+    <div class="card glass p-4 mt-4">
+        <h2 class="text-gradient mb-4 text-center">📅 Aniversariantes em {{ futuro }}</h2>
+
+        {% if aniversariantes_em_sete %}
+        <ul class="list-group list-group-flush">
+            {% for pessoa in aniversariantes_em_sete %}
+            <li class="list-group-item glass-item d-flex justify-content-between align-items-center">
+                <span>{{ pessoa.nome }}</span>
+                <span class="badge bg-gradient-warning">{{ pessoa.data_nascimento.strftime('%d/%m') }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-center text-muted">Ninguém faz aniversário daqui a 7 dias. 🗓️</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
