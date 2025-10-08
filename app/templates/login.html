@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
-
+{% block title %}Login{% endblock %}
 {% block content %}
-    <h1>Login</h1>
-    <form method="POST" action="{{ url_for('main_bp.login') }}">
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card glass p-4 fade-in">
+            <h3 class="mb-4 text-center text-gradient">Entrar</h3>
+            <form method="POST" action="{{ url_for('main_bp.login') }}">
+                <input type="email" id="email" name="email" class="form-control mb-3" placeholder="Email" required>
+                <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Senha"
+                    required>
+                <button type="submit" class="btn btn-glow w-100">Entrar</button>
+            </form>
         </div>
-        <div>
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit">Entrar</button>
-    </form>
+    </div>
+</div>
 {% endblock %}
