@@ -1,4 +1,5 @@
-from datetime import datetime
+from app.models import Usuario
+from datetime import datetime, timedelta
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -82,3 +83,34 @@ def logout():
     logout_user()
     flash("Você foi desconectado com sucesso.", "success")
     return redirect(url_for('main_bp.login'))
+
+
+@main_bp.route('/aniversarios')
+@login_required
+def aniversarios():
+    hoje = datetime.today()
+    daqui_sete_dias = hoje + timedelta(days=7)
+
+    # Extrai apenas mês e dia
+    hoje_md = (hoje.month, hoje.day)
+    sete_md = (daqui_sete_dias.month, daqui_sete_dias.day)
+
+    # Busca aniversariantes do dia
+    aniversariantes_hoje = Usuario.query.filter(
+        db.extract('month', Usuario.data_nascimento) == hoje_md[0],
+        db.extract('day', Usuario.data_nascimento) == hoje_md[1]
+    ).all()
+
+    # Busca aniversariantes daqui a 7 dias
+    aniversariantes_em_sete = Usuario.query.filter(
+        db.extract('month', Usuario.data_nascimento) == sete_md[0],
+        db.extract('day', Usuario.data_nascimento) == sete_md[1]
+    ).all()
+
+    return render_template(
+        'aniversarios.html',
+        aniversariantes_hoje=aniversariantes_hoje,
+        aniversariantes_em_sete=aniversariantes_em_sete,
+        hoje=hoje.strftime('%d/%m/%Y'),
+        futuro=daqui_sete_dias.strftime('%d/%m/%Y')
+    )
