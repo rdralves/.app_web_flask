@@ -63,7 +63,7 @@ def login():
         if usuario and check_password_hash(usuario.senha_hash, password):
             login_user(usuario)
             flash(f"Bem-vindo de volta, {usuario.nome}!", "success")
-            return redirect(url_for('main_bp.dashboard'))
+            return redirect(url_for('main_bp.aniversarios'))
         else:
             flash("Email ou senha inválidos.", "danger")
 
