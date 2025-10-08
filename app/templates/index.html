@@ -1,11 +1,9 @@
 {% extends "base.html" %}
-
 {% block title %}Página Inicial{% endblock %}
-
 {% block content %}
-<a class="navbar-brand" href="{{ url_for('main_bp.home') }}">Cadastro</a>
-<h1>{{ hello }}</h1>
-
-<h2>Bem-vindo ao meu aplicativo Flask!  </h2>
-
+<div class="text-center mt-5">
+    <h1 class="fw-bold display-5 mb-3 text-gradient">Bem-vindo ao Meu App Flask!</h1>
+    <p class="lead text-secondary">Explore o poder do Flask com estilo.</p>
+    <a href="{{ url_for('main_bp.home') }}" class="btn btn-glow mt-4 px-4 py-2">Ir para Cadastro</a>
+</div>
 {% endblock %}
